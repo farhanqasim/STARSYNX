@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -16,6 +16,8 @@ import {
   Award,
   TrendingUp,
   ArrowRight,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 import Button from "@/components/ui/Button";
 import AnimatedText from "@/components/ui/AnimatedText";
@@ -23,6 +25,171 @@ import Accordion from "@/components/ui/Accordion";
 import ContactForm from "@/components/shared/ContactForm";
 import ParticlesBackground from "@/components/ui/ParticlesBackground";
 import { useAnalytics } from "@/contexts/AnalyticsContext";
+
+const certifications = [
+  {
+    name: "Pakistan Software Export Board",
+    logo: "/certifications/pseb.jpg",
+    alt: "PSEB Certified",
+  },
+  {
+    name: "Securities & Exchange Commission",
+    logo: "/certifications/secp.png",
+    alt: "SECP Registered",
+  },
+  {
+    name: "Lahore Chamber of Commerce",
+    logo: "/certifications/lcci.jpg",
+    alt: "LCCI Member",
+  },
+  {
+    name: "Federal Board of Revenue",
+    logo: "/certifications/fbr.jpg",
+    alt: "FBR Registered",
+  },
+  {
+    name: "Intellectual Property Organization",
+    logo: "/certifications/ipo.jpg",
+    alt: "IPO-Pakistan",
+  },
+];
+
+function CertificationsCarousel() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [itemsToShow, setItemsToShow] = useState(4);
+
+  useEffect(() => {
+    const updateItemsToShow = () => {
+      if (window.innerWidth >= 1024) {
+        setItemsToShow(4);
+      } else if (window.innerWidth >= 768) {
+        setItemsToShow(3);
+      } else {
+        setItemsToShow(2);
+      }
+    };
+
+    updateItemsToShow();
+    window.addEventListener("resize", updateItemsToShow);
+    return () => window.removeEventListener("resize", updateItemsToShow);
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % (certifications.length - itemsToShow + 1));
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [itemsToShow]);
+
+  const nextSlide = () => {
+    setCurrentIndex((prev) =>
+      prev >= certifications.length - itemsToShow ? 0 : prev + 1
+    );
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex((prev) =>
+      prev <= 0 ? certifications.length - itemsToShow : prev - 1
+    );
+  };
+
+  return (
+    <div className="relative max-w-6xl mx-auto px-8 lg:px-12">
+      {/* Carousel Container */}
+      <div className="relative overflow-hidden rounded-2xl">
+        <motion.div
+          className="flex"
+          animate={{
+            x: `-${currentIndex * (100 / itemsToShow)}%`,
+          }}
+          transition={{
+            type: "spring",
+            stiffness: 300,
+            damping: 30,
+          }}
+        >
+          {certifications.map((cert, index) => (
+            <div
+              key={cert.name}
+              className="flex-shrink-0 px-4"
+              style={{
+                width: `${100 / itemsToShow}%`,
+              }}
+            >
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                className="text-center"
+              >
+                <div className="w-32 h-32 bg-white rounded-xl shadow-lg flex items-center justify-center mx-auto hover:shadow-xl transition-all duration-300 p-4 border border-slate-100 hover:scale-105">
+                  <Image
+                    src={cert.logo}
+                    alt={cert.alt}
+                    width={100}
+                    height={100}
+                    className="w-full h-full object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
+                    onError={(e) => {
+                      e.currentTarget.style.display = "none";
+                      if (e.currentTarget.nextElementSibling) {
+                        e.currentTarget.nextElementSibling.classList.remove(
+                          "hidden"
+                        );
+                      }
+                    }}
+                  />
+                  <div className="hidden text-center">
+                    <Shield className="w-12 h-12 text-cyan-500 mx-auto mb-2" />
+                    <span className="text-xs font-semibold text-slate-600">
+                      {cert.name}
+                    </span>
+                  </div>
+                </div>
+                <p className="text-xs text-slate-600 mt-3 font-medium">
+                  {cert.name}
+                </p>
+              </motion.div>
+            </div>
+          ))}
+        </motion.div>
+      </div>
+
+      {/* Navigation Buttons */}
+      <button
+        onClick={prevSlide}
+        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 lg:-translate-x-12 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-cyan-50 border border-slate-200 z-10"
+        aria-label="Previous certification"
+      >
+        <ChevronLeft className="w-6 h-6 text-slate-700" />
+      </button>
+      <button
+        onClick={nextSlide}
+        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 lg:translate-x-12 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-cyan-50 border border-slate-200 z-10"
+        aria-label="Next certification"
+      >
+        <ChevronRight className="w-6 h-6 text-slate-700" />
+      </button>
+
+      {/* Dots Indicator */}
+      <div className="flex justify-center gap-2 mt-8">
+        {Array.from({
+          length: certifications.length - itemsToShow + 1,
+        }).map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentIndex(index)}
+            className={`w-2 h-2 rounded-full transition-all duration-300 ${
+              index === currentIndex
+                ? "bg-cyan-500 w-8"
+                : "bg-slate-300 hover:bg-slate-400"
+            }`}
+            aria-label={`Go to slide ${index + 1}`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export default function HomePage() {
   const { trackPageVisit, trackCTAClick } = useAnalytics();
@@ -391,66 +558,7 @@ export default function HomePage() {
             </AnimatedText>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center max-w-5xl mx-auto">
-            {[
-              {
-                name: "Pakistan Software Export Board",
-                logo: "/certifications/pseb.jpg",
-                alt: "PSEB Certified",
-              },
-              {
-                name: "Securities & Exchange Commission",
-                logo: "/certifications/secp.png",
-                alt: "SECP Registered",
-              },
-              {
-                name: "Lahore Chamber of Commerce",
-                logo: "/certifications/lcci.jpg",
-                alt: "LCCI Member",
-              },
-              {
-                name: "Federal Board of Revenue",
-                logo: "/certifications/fbr.jpg",
-                alt: "FBR Registered",
-              },
-            ].map((cert, index) => (
-              <motion.div
-                key={cert.name}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="text-center"
-              >
-                <div className="w-32 h-32 bg-white rounded-xl shadow-lg flex items-center justify-center mx-auto hover:shadow-xl transition-shadow duration-300 p-4 border border-slate-100">
-                  <Image
-                    src={cert.logo}
-                    alt={cert.alt}
-                    width={100}
-                    height={100}
-                    className="w-full h-full object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
-                    onError={(e) => {
-                      e.currentTarget.style.display = "none";
-                      if (e.currentTarget.nextElementSibling) {
-                        e.currentTarget.nextElementSibling.classList.remove(
-                          "hidden"
-                        );
-                      }
-                    }}
-                  />
-                  <div className="hidden text-center">
-                    <Award className="w-12 h-12 text-cyan-500 mx-auto mb-2" />
-                    <span className="text-xs font-semibold text-slate-600">
-                      {cert.name}
-                    </span>
-                  </div>
-                </div>
-                <p className="text-xs text-slate-600 mt-3 font-medium">
-                  {cert.name}
-                </p>
-              </motion.div>
-            ))}
-          </div>
+          <CertificationsCarousel />
         </div>
       </section>
 
