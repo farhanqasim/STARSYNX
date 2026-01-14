@@ -18,6 +18,7 @@ export default function ContactForm() {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [error, setError] = useState("");
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -32,6 +33,31 @@ export default function ContactForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError("");
+
+    // Client-side validation
+    if (!formData.name.trim()) {
+      setError("Please enter your full name");
+      return;
+    }
+
+    if (!formData.email.trim()) {
+      setError("Please enter your email address");
+      return;
+    }
+
+    // Email format validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      setError("Please enter a valid email address");
+      return;
+    }
+
+    if (!formData.message.trim()) {
+      setError("Please enter your message");
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
@@ -40,7 +66,14 @@ export default function ContactForm() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          company: formData.company.trim(),
+          phone: formData.phone.trim(),
+          service: formData.service,
+          message: formData.message.trim(),
+        }),
       });
 
       const result = await response.json();
@@ -49,8 +82,9 @@ export default function ContactForm() {
         // Track form submission
         trackFormSubmission();
         setIsSubmitted(true);
+        setError("");
 
-        // Reset form after 3 seconds
+        // Reset form after 5 seconds
         setTimeout(() => {
           setIsSubmitted(false);
           setFormData({
@@ -61,14 +95,13 @@ export default function ContactForm() {
             service: "",
             message: "",
           });
-        }, 3000);
+        }, 5000);
       } else {
-        console.error("Form submission error:", result.error);
-        alert("Failed to send message. Please try again.");
+        setError(result.error || "Failed to send message. Please try again.");
       }
     } catch (error) {
       console.error("Form submission error:", error);
-      alert("Failed to send message. Please try again.");
+      setError("Failed to send message. Please check your connection and try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -112,6 +145,7 @@ export default function ContactForm() {
       viewport={{ once: true }}
       onSubmit={handleSubmit}
       className="bg-white rounded-xl shadow-lg p-8 space-y-6"
+      noValidate
     >
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
@@ -125,9 +159,11 @@ export default function ContactForm() {
             type="text"
             id="name"
             name="name"
-            required
             value={formData.name}
-            onChange={handleChange}
+            onChange={(e) => {
+              handleChange(e);
+              setError("");
+            }}
             className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400 transition-colors duration-200"
             placeholder="Your full name"
           />
@@ -144,9 +180,11 @@ export default function ContactForm() {
             type="email"
             id="email"
             name="email"
-            required
             value={formData.email}
-            onChange={handleChange}
+            onChange={(e) => {
+              handleChange(e);
+              setError("");
+            }}
             className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400 transition-colors duration-200"
             placeholder="your@email.com"
           />
@@ -227,13 +265,25 @@ export default function ContactForm() {
           id="message"
           name="message"
           rows={4}
-          required
           value={formData.message}
-          onChange={handleChange}
+          onChange={(e) => {
+            handleChange(e);
+            setError("");
+          }}
           className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400 transition-colors duration-200 resize-vertical"
           placeholder="Tell us about your project requirements..."
         />
       </div>
+
+      {error && (
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg"
+        >
+          <p className="text-sm">{error}</p>
+        </motion.div>
+      )}
 
       <Button
         type="submit"
@@ -241,7 +291,14 @@ export default function ContactForm() {
         className="w-full"
         size="lg"
       >
-        {isSubmitting ? "Sending..." : "Send Message"}
+        {isSubmitting ? (
+          <>
+            <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2 inline-block"></div>
+            Sending...
+          </>
+        ) : (
+          "Send Message"
+        )}
       </Button>
     </motion.form>
   );

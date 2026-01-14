@@ -8,7 +8,7 @@ export default function WhatsAppButton() {
   const [isHovered, setIsHovered] = useState(false);
 
   const handleWhatsAppClick = () => {
-    const phoneNumber = '+971564853101'; // STARSYNX UAE number
+    const phoneNumber = '923030735555'; // STARSYNX Pakistan number
     const message = 'Hello! I would like to inquire about your digital marketing services.';
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');

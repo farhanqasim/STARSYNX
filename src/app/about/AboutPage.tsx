@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { useState, useEffect } from "react";
 import {
   Target,
   Users,
@@ -9,9 +10,178 @@ import {
   TrendingUp,
   Lightbulb,
   Shield,
+  ChevronLeft,
+  ChevronRight,
+  Globe,
+  FileText,
 } from "lucide-react";
 import AnimatedText from "@/components/ui/AnimatedText";
 import Button from "@/components/ui/Button";
+
+const certifications = [
+  {
+    name: "Pakistan Software Export Board",
+    logo: "/certifications/pseb.jpg",
+    alt: "PSEB Certified",
+  },
+  {
+    name: "Securities & Exchange Commission",
+    logo: "/certifications/secp.png",
+    alt: "SECP Registered",
+  },
+  {
+    name: "Lahore Chamber of Commerce",
+    logo: "/certifications/lcci.jpg",
+    alt: "LCCI Member",
+  },
+  {
+    name: "Federal Board of Revenue",
+    logo: "/certifications/fbr.jpg",
+    alt: "FBR Registered",
+  },
+  {
+    name: "Intellectual Property Organization",
+    logo: "/certifications/ipo.jpg",
+    alt: "IPO-Pakistan",
+  },
+];
+
+function CertificationsCarousel() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [itemsToShow, setItemsToShow] = useState(4);
+
+  useEffect(() => {
+    const updateItemsToShow = () => {
+      if (window.innerWidth >= 1024) {
+        setItemsToShow(4);
+      } else if (window.innerWidth >= 768) {
+        setItemsToShow(3);
+      } else {
+        setItemsToShow(2);
+      }
+    };
+
+    updateItemsToShow();
+    window.addEventListener("resize", updateItemsToShow);
+    return () => window.removeEventListener("resize", updateItemsToShow);
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % (certifications.length - itemsToShow + 1));
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [itemsToShow]);
+
+  const nextSlide = () => {
+    setCurrentIndex((prev) =>
+      prev >= certifications.length - itemsToShow ? 0 : prev + 1
+    );
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex((prev) =>
+      prev <= 0 ? certifications.length - itemsToShow : prev - 1
+    );
+  };
+
+  return (
+    <div className="relative max-w-6xl mx-auto px-8 lg:px-12">
+      {/* Carousel Container */}
+      <div className="relative overflow-hidden rounded-2xl">
+        <motion.div
+          className="flex"
+          animate={{
+            x: `-${currentIndex * (100 / itemsToShow)}%`,
+          }}
+          transition={{
+            type: "spring",
+            stiffness: 300,
+            damping: 30,
+          }}
+        >
+          {certifications.map((cert, index) => (
+            <div
+              key={cert.name}
+              className="flex-shrink-0 px-4"
+              style={{
+                width: `${100 / itemsToShow}%`,
+              }}
+            >
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                className="text-center"
+              >
+                <div className="w-32 h-32 bg-white rounded-xl shadow-lg flex items-center justify-center mx-auto hover:shadow-xl transition-all duration-300 p-4 border border-slate-100 hover:scale-105">
+                  <Image
+                    src={cert.logo}
+                    alt={cert.alt}
+                    width={100}
+                    height={100}
+                    className="w-full h-full object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
+                    onError={(e) => {
+                      e.currentTarget.style.display = "none";
+                      if (e.currentTarget.nextElementSibling) {
+                        e.currentTarget.nextElementSibling.classList.remove(
+                          "hidden"
+                        );
+                      }
+                    }}
+                  />
+                  <div className="hidden text-center">
+                    <Shield className="w-12 h-12 text-cyan-500 mx-auto mb-2" />
+                    <span className="text-xs font-semibold text-slate-600">
+                      {cert.name}
+                    </span>
+                  </div>
+                </div>
+                <p className="text-xs text-slate-600 mt-3 font-medium">
+                  {cert.name}
+                </p>
+              </motion.div>
+            </div>
+          ))}
+        </motion.div>
+      </div>
+
+      {/* Navigation Buttons */}
+      <button
+        onClick={prevSlide}
+        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 lg:-translate-x-12 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-cyan-50 border border-slate-200 z-10"
+        aria-label="Previous certification"
+      >
+        <ChevronLeft className="w-6 h-6 text-slate-700" />
+      </button>
+      <button
+        onClick={nextSlide}
+        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 lg:translate-x-12 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-cyan-50 border border-slate-200 z-10"
+        aria-label="Next certification"
+      >
+        <ChevronRight className="w-6 h-6 text-slate-700" />
+      </button>
+
+      {/* Dots Indicator */}
+      <div className="flex justify-center gap-2 mt-8">
+        {Array.from({
+          length: certifications.length - itemsToShow + 1,
+        }).map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentIndex(index)}
+            className={`w-2 h-2 rounded-full transition-all duration-300 ${
+              index === currentIndex
+                ? "bg-cyan-500 w-8"
+                : "bg-slate-300 hover:bg-slate-400"
+            }`}
+            aria-label={`Go to slide ${index + 1}`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export default function AboutPage() {
   const features = [
@@ -278,7 +448,7 @@ export default function AboutPage() {
                 <div className="hidden sm:block text-slate-400">|</div>
                 <div className="flex items-center gap-2">
                   <div className="w-4 h-4 bg-cyan-400 rounded-full"></div>
-                  <span className="text-sm">UAE: +971 56 485 3101</span>
+                  <span className="text-sm">UAE: +92 303 073 5555</span>
                 </div>
                 <div className="hidden sm:block text-slate-400">|</div>
                 <div className="flex items-center gap-2">
@@ -522,66 +692,7 @@ export default function AboutPage() {
             </AnimatedText>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center max-w-5xl mx-auto">
-            {[
-              {
-                name: "Pakistan Software Export Board",
-                logo: "/certifications/pseb.jpg",
-                alt: "PSEB Certified",
-              },
-              {
-                name: "Securities & Exchange Commission",
-                logo: "/certifications/secp.png",
-                alt: "SECP Registered",
-              },
-              {
-                name: "Lahore Chamber of Commerce",
-                logo: "/certifications/lcci.jpg",
-                alt: "LCCI Member",
-              },
-              {
-                name: "Federal Board of Revenue",
-                logo: "/certifications/fbr.jpg",
-                alt: "FBR Registered",
-              },
-            ].map((cert, index) => (
-              <motion.div
-                key={cert.name}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="text-center"
-              >
-                <div className="w-32 h-32 bg-white rounded-xl shadow-lg flex items-center justify-center mx-auto hover:shadow-xl transition-shadow duration-300 p-4 border border-slate-100">
-                  <Image
-                    src={cert.logo}
-                    alt={cert.alt}
-                    width={100}
-                    height={100}
-                    className="w-full h-full object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
-                    onError={(e) => {
-                      e.currentTarget.style.display = "none";
-                      if (e.currentTarget.nextElementSibling) {
-                        e.currentTarget.nextElementSibling.classList.remove(
-                          "hidden"
-                        );
-                      }
-                    }}
-                  />
-                  <div className="hidden text-center">
-                    <Shield className="w-12 h-12 text-cyan-500 mx-auto mb-2" />
-                    <span className="text-xs font-semibold text-slate-600">
-                      {cert.name}
-                    </span>
-                  </div>
-                </div>
-                <p className="text-xs text-slate-600 mt-3 font-medium">
-                  {cert.name}
-                </p>
-              </motion.div>
-            ))}
-          </div>
+          <CertificationsCarousel />
         </div>
       </section>
 
@@ -626,6 +737,94 @@ export default function AboutPage() {
                 </div>
               </motion.div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Our Websites Section */}
+      <section className="py-24 bg-gradient-to-br from-slate-50 to-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <AnimatedText
+              variant="h2"
+              className="text-4xl font-bold text-slate-800 mb-4"
+            >
+              Our Digital Platforms
+            </AnimatedText>
+            <AnimatedText
+              variant="p"
+              className="text-lg text-slate-600"
+              delay={0.1}
+            >
+              Explore our innovative e-commerce and digital solutions
+            </AnimatedText>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {/* Tadow.shop */}
+            <motion.a
+              href="https://www.tadow.shop"
+              target="_blank"
+              rel="noopener noreferrer"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 p-8 border border-slate-200 group"
+            >
+              <div className="flex flex-col items-center text-center">
+                <div className="w-32 h-32 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-105 transition-transform duration-300">
+                  <Globe className="w-16 h-16 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-slate-800 mb-2">
+                  Tadow.shop
+                </h3>
+                <p className="text-slate-600 mb-4">
+                  Your one-stop destination for electronics, gadgets, and tech
+                  products
+                </p>
+                <div className="flex items-center gap-2 text-cyan-600 font-semibold">
+                  <span>Visit Store</span>
+                  <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </div>
+              </div>
+            </motion.a>
+
+            {/* BookByte.store */}
+            <motion.a
+              href="https://www.bookbyte.store"
+              target="_blank"
+              rel="noopener noreferrer"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 p-8 border border-slate-200 group"
+            >
+              <div className="flex flex-col items-center text-center">
+                <div className="w-32 h-32 bg-gradient-to-br from-orange-400 to-orange-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-105 transition-transform duration-300 relative overflow-hidden">
+                  {/* Book Icon Representation */}
+                  <div className="relative z-10">
+                    <div className="w-16 h-20 bg-white/20 rounded backdrop-blur-sm flex items-center justify-center">
+                      <FileText className="w-10 h-10 text-white" />
+                    </div>
+                  </div>
+                  {/* Decorative elements */}
+                  <div className="absolute top-2 left-2 w-8 h-10 bg-white/10 rounded"></div>
+                  <div className="absolute bottom-2 right-2 w-6 h-8 bg-white/10 rounded"></div>
+                </div>
+                <h3 className="text-2xl font-bold text-slate-800 mb-2">
+                  BookByte.store
+                </h3>
+                <p className="text-slate-600 mb-4">
+                  A Byte of Magic in Every Book - Your online bookstore
+                </p>
+                <div className="flex items-center gap-2 text-orange-600 font-semibold">
+                  <span>Visit Store</span>
+                  <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </div>
+              </div>
+            </motion.a>
           </div>
         </div>
       </section>

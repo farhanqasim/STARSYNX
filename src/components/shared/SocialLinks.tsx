@@ -1,4 +1,4 @@
-import { Linkedin, Facebook, Instagram } from "lucide-react";
+import { Linkedin, Facebook, Instagram, Twitter } from "lucide-react";
 
 interface SocialLinksProps {
   className?: string;
@@ -24,6 +24,11 @@ export default function SocialLinks({
       name: "Instagram",
       href: "https://instagram.com/starsynx",
       icon: Instagram,
+    },
+    {
+      name: "X (Twitter)",
+      href: "https://x.com/starsynx",
+      icon: Twitter,
     },
   ];
 

@@ -22,7 +22,7 @@ export default function ContactPage() {
         "Suit No. 9, Izhar Villas, Wafaqi Colony Road,\nJohar Town, Lahore, Pakistan",
       phone: "+92 303 073 5555",
       email: "contact@starsynx.com",
-      hours: "Mon - Fri: 9:00 AM - 6:00 PM",
+      hours: "Mon - Fri: 9:00 AM - 5:00 PM",
       flag: "��",
       icon: <Building className="w-8 h-8" />,
     },
@@ -30,9 +30,9 @@ export default function ContactPage() {
       country: "UAE (Regional Office)",
       isHeadOffice: false,
       address: "Office M-06, Makeen Building,\nAl Garhoud, Dubai, UAE",
-      phone: "+971 56 485 3101",
+      phone: "+92 303 073 5555",
       email: "contact@starsynx.com",
-      hours: "Sun - Thu: 9:00 AM - 6:00 PM",
+      hours: "Mon - Fri: 9:00 AM - 5:00 PM",
       flag: "��",
       icon: <Building className="w-8 h-8" />,
     },
@@ -154,7 +154,7 @@ export default function ContactPage() {
                       <Image
                         src={
                           office.country.includes("Pakistan")
-                            ? "/pics/Pak.jpg"
+                            ? "/pics/paks.jpg"
                             : office.country.includes("Australia")
                             ? "/pics/aus.jpg"
                             : "/pics/uae.jpg"
@@ -283,7 +283,7 @@ export default function ContactPage() {
                   <Image
                     src={
                       office.country.includes("Pakistan")
-                        ? "/pics/Pak.jpg"
+                        ? "/pics/paks.jpg"
                         : office.country.includes("Australia")
                         ? "/pics/aus.jpg"
                         : "/pics/uae.jpg"
@@ -399,7 +399,7 @@ export default function ContactPage() {
                 </motion.a>
 
                 <motion.a
-                  href="https://wa.me/971564853101"
+                  href="https://wa.me/923030735555"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 group border-l-4 border-green-500"
@@ -417,7 +417,7 @@ export default function ContactPage() {
                     UAE Office
                   </h3>
                   <p className="text-green-600 font-mono text-xl font-bold">
-                    +971 56 485 3101
+                    +92 303 073 5555
                   </p>
                   <p className="text-sm text-slate-500 mt-2">
                     Business Hours Support

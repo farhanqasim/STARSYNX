@@ -3,19 +3,33 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Mail, MapPin, Phone, Shield, LogOut, Send } from "lucide-react";
+import { Mail, MapPin, Phone, Send } from "lucide-react";
 import SocialLinks from "@/components/shared/SocialLinks";
-import AdminLoginModal from "@/components/ui/AdminLoginModal";
-import { useAuth } from "@/contexts/AuthContext";
 
 export default function Footer() {
   const [email, setEmail] = useState("");
   const [isSubscribed, setIsSubscribed] = useState(false);
-  const [showAdminModal, setShowAdminModal] = useState(false);
-  const { isAdmin, logout } = useAuth();
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleNewsletterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError("");
+
+    // Client-side validation
+    if (!email.trim()) {
+      setError("Please enter your email address");
+      return;
+    }
+
+    // Email format validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setError("Please enter a valid email address");
+      return;
+    }
+
+    setIsLoading(true);
 
     try {
       const response = await fetch("/api/newsletter", {
@@ -23,7 +37,7 @@ export default function Footer() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email: email.trim() }),
       });
 
       const result = await response.json();
@@ -31,30 +45,19 @@ export default function Footer() {
       if (response.ok) {
         setIsSubscribed(true);
         setEmail("");
-        setTimeout(() => setIsSubscribed(false), 3000);
+        setError("");
+        setTimeout(() => setIsSubscribed(false), 5000);
       } else {
-        console.error("Newsletter subscription error:", result.error);
-        alert("Failed to subscribe. Please try again.");
+        setError(result.error || "Failed to subscribe. Please try again.");
       }
     } catch (error) {
       console.error("Newsletter subscription error:", error);
-      alert("Failed to subscribe. Please try again.");
+      setError("Failed to subscribe. Please try again.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  const handleAdminClick = () => {
-    if (isAdmin) {
-      // If already logged in, go to admin panel
-      window.location.href = "/admin";
-    } else {
-      // If not logged in, show login modal
-      setShowAdminModal(true);
-    }
-  };
-
-  const handleLogout = () => {
-    logout();
-  };
 
   const quickLinks = [
     { href: "/", label: "Home" },
@@ -102,23 +105,52 @@ export default function Footer() {
               ) : (
                 <form
                   onSubmit={handleNewsletterSubmit}
-                  className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
+                  className="flex flex-col gap-3 max-w-md mx-auto"
+                  noValidate
                 >
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Enter your email address"
-                    required
-                    className="flex-1 px-4 py-2.5 rounded-lg bg-slate-700 border border-slate-600 text-white placeholder-slate-400 focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400 transition-colors duration-200"
-                  />
-                  <button
-                    type="submit"
-                    className="px-5 py-2.5 bg-cyan-400 hover:bg-cyan-500 text-slate-900 font-semibold rounded-lg transition-colors duration-300 flex items-center justify-center"
-                  >
-                    <Send className="w-4 h-4 mr-2" />
-                    Subscribe
-                  </button>
+                  <div className="flex flex-col sm:flex-row gap-3">
+                    <div className="flex-1">
+                      <input
+                        type="email"
+                        value={email}
+                        onChange={(e) => {
+                          setEmail(e.target.value);
+                          setError("");
+                        }}
+                        placeholder="Enter your email address"
+                        className={`w-full px-4 py-2.5 rounded-lg bg-slate-700 border text-white placeholder-slate-400 focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400 transition-colors duration-200 ${
+                          error ? "border-red-500" : "border-slate-600"
+                        }`}
+                        disabled={isLoading}
+                      />
+                      {error && (
+                        <motion.p
+                          initial={{ opacity: 0, y: -5 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          className="text-red-400 text-sm mt-1 text-left"
+                        >
+                          {error}
+                        </motion.p>
+                      )}
+                    </div>
+                    <button
+                      type="submit"
+                      disabled={isLoading}
+                      className="px-5 py-2.5 bg-cyan-400 hover:bg-cyan-500 disabled:bg-cyan-600 disabled:cursor-not-allowed text-slate-900 font-semibold rounded-lg transition-colors duration-300 flex items-center justify-center whitespace-nowrap"
+                    >
+                      {isLoading ? (
+                        <>
+                          <div className="w-4 h-4 border-2 border-slate-900 border-t-transparent rounded-full animate-spin mr-2"></div>
+                          Subscribing...
+                        </>
+                      ) : (
+                        <>
+                          <Send className="w-4 h-4 mr-2" />
+                          Subscribe
+                        </>
+                      )}
+                    </button>
+                  </div>
                 </form>
               )}
             </div>
@@ -196,7 +228,7 @@ export default function Footer() {
                   <MapPin className="w-4 h-4 text-cyan-400 mt-0.5 flex-shrink-0" />
                   <div className="text-slate-300 text-sm">
                     <p>Pakistan (Head Office)</p>
-                    <p>UAE & Australia (Regional)</p>
+                    <p>UAE & Australia (Regional Office)</p>
                   </div>
                 </div>
 
@@ -219,39 +251,6 @@ export default function Footer() {
                     contact@starsynx.com
                   </a>
                 </div>
-              </div>
-
-              {/* Admin Section */}
-              <div className="mt-4 pt-4 border-t border-slate-700">
-                <h5 className="text-xs font-semibold mb-2 text-cyan-400">
-                  Admin Access
-                </h5>
-                {isAdmin ? (
-                  <div className="space-y-1.5">
-                    <button
-                      onClick={handleAdminClick}
-                      className="flex items-center space-x-2 text-green-400 hover:text-green-300 transition-colors duration-300 text-xs"
-                    >
-                      <Shield className="w-3 h-3" />
-                      <span>Admin Panel</span>
-                    </button>
-                    <button
-                      onClick={handleLogout}
-                      className="flex items-center space-x-2 text-slate-400 hover:text-slate-300 transition-colors duration-300 text-xs"
-                    >
-                      <LogOut className="w-3 h-3" />
-                      <span>Logout</span>
-                    </button>
-                  </div>
-                ) : (
-                  <button
-                    onClick={handleAdminClick}
-                    className="flex items-center space-x-2 text-slate-400 hover:text-cyan-400 transition-colors duration-300 text-xs"
-                  >
-                    <Shield className="w-3 h-3" />
-                    <span>Admin Login</span>
-                  </button>
-                )}
               </div>
             </div>
           </div>
@@ -294,12 +293,6 @@ export default function Footer() {
           </div>
         </div>
       </footer>
-
-      {/* Admin Login Modal */}
-      <AdminLoginModal
-        isOpen={showAdminModal}
-        onClose={() => setShowAdminModal(false)}
-      />
     </>
   );
 }

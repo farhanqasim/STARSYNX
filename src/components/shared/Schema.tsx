@@ -38,6 +38,7 @@ export default function Schema() {
       "https://linkedin.com/company/starsynx",
       "https://instagram.com/starsynx",
       "https://facebook.com/starsynx",
+      "https://x.com/starsynx",
     ],
     services: [
       "SEO Services",

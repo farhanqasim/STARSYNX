@@ -157,6 +157,14 @@ export default function HomePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="text-xl sm:text-2xl lg:text-3xl font-semibold text-cyan-400 mb-4 tracking-wide"
+            >
+              STARSYNX (PVT) LTD.
+            </motion.p>
             <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-white mb-6 leading-tight">
               Synchronizing Technology
               <span className="block text-cyan-400 text-3xl sm:text-4xl lg:text-5xl mt-4">
