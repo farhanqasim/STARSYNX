@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import Button from "@/components/ui/Button";
@@ -43,19 +44,21 @@ export default function Header() {
           {/* Logo */}
           <Link href="/" className="flex items-center">
             <div className="flex items-center space-x-[-20px]">
-              <img
+              <Image
                 src="/logo2.png"
                 alt="STARSYNX Logo"
-                width="90"
-                height="90"
-                className="object-contain  m-0 p-0"
+                width={90}
+                height={90}
+                className="object-contain m-0 p-0"
+                priority
               />
-              <img
+              <Image
                 src="/logo1.png"
                 alt="STARSYNX Logo"
-                width="90"
-                height="90"
-                className="object-contain  m-0 p-0"
+                width={90}
+                height={90}
+                className="object-contain m-0 p-0"
+                priority
               />
             </div>
           </Link>
