@@ -178,7 +178,7 @@ export default function TermsPage() {
                             </a>
                             , along with any related services, content, or
                             communications provided by STARSYNX PVT LTD
-                            ("Company," "we," "us," or "our"). By accessing or
+                            (&quot;Company,&quot; &quot;we,&quot; &quot;us,&quot; or &quot;our&quot;). By accessing or
                             using our website or services, you confirm that you
                             have read, understood, and agree to be legally bound
                             by these Terms and Conditions. If you do not agree,
@@ -388,7 +388,7 @@ export default function TermsPage() {
                       <div className="bg-white rounded-lg p-4 border-l-2 border-orange-400 pl-13">
                         <p className="leading-relaxed text-slate-700">
                           All information and services provided on this website are
-                          offered on an "as is" and "as available" basis. While
+                          offered on an &quot;as is&quot; and &quot;as available&quot; basis. While
                           STARSYNX PVT LTD strives to ensure accuracy and
                           reliability, we make no warranties or guarantees
                           regarding the completeness, accuracy, or suitability of

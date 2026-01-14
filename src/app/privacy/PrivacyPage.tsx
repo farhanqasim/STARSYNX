@@ -151,13 +151,13 @@ export default function PrivacyPage() {
                             Introduction
                           </h3>
                           <p className="leading-relaxed mb-4 text-slate-700">
-                            The website ("Site") for STARSYNX PVT LTD ("STARSYNX,"
-                            "We," "Our," "Us," or "Company") was created to provide
-                            digital solutions and IT services (the "Services").
+                            The website (&quot;Site&quot;) for STARSYNX PVT LTD (&quot;STARSYNX,&quot;
+                            &quot;We,&quot; &quot;Our,&quot; &quot;Us,&quot; or &quot;Company&quot;) was created to provide
+                            digital solutions and IT services (the &quot;Services&quot;).
                           </p>
                           <p className="leading-relaxed text-slate-700">
-                            The privacy of our website visitors ("you," "your," or
-                            "User") is extremely important to us. This Privacy
+                            The privacy of our website visitors (&quot;you,&quot; &quot;your,&quot; or
+                            &quot;User&quot;) is extremely important to us. This Privacy
                             Policy explains the types of information we collect, how
                             we use it, and the choices you have regarding your
                             personal information. By accessing or using our Site or
@@ -185,7 +185,7 @@ export default function PrivacyPage() {
                       <p className="leading-relaxed text-slate-700 pl-13">
                         We may update this Privacy Policy from time to time to
                         reflect changes in our practices, legal requirements, or
-                        our Services. The "Last Updated" date at the top will be
+                        our Services. The &quot;Last Updated&quot; date at the top will be
                         revised accordingly. If a material change affects how we
                         collect or use personal information, we will notify you
                         via email or post a notice on the homepage of our Site.
@@ -500,7 +500,7 @@ export default function PrivacyPage() {
                         <div className="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center">
                           <Shield className="w-5 h-5 text-red-600" />
                         </div>
-                        Children's Privacy
+                        Children&apos;s Privacy
                       </h3>
                       <p className="leading-relaxed text-slate-700 pl-13">
                         Our Site is not intended for use by children under 18
