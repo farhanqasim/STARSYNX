@@ -261,7 +261,7 @@ export default function Footer() {
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
             <div className="flex flex-col lg:flex-row justify-between items-center space-y-3 lg:space-y-0 gap-3">
               <p className="text-slate-400 text-xs sm:text-sm text-center lg:text-left">
-                © 2025 STARSYNX (PVT) LTD. All rights reserved.
+                © 2026 STARSYNX (PVT) LTD. All rights reserved.
               </p>
               <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 text-xs sm:text-sm text-slate-400">
                 <div className="flex items-center gap-3 sm:gap-4">

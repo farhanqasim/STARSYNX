@@ -13,28 +13,27 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "STARSYNX (PVT) LTD. - Synchronizing Technology, Accelerating Results",
+  title: "STARSYNX PVT LTD | Digital, AI & IT Solutions Company",
   description:
-    "STARSYNX (PVT) LTD. delivers cutting-edge digital solutions across four categories: Digital Experience Solutions, Intelligent & Automated Systems, Digital Presence & Growth, and IT Hardware & Trade. Founded by Muhammad Nadeem Ashraf, led by CEO Muhammad Hamza Nadeem. Global presence with Head Office in Pakistan, and regional offices in UAE and Australia.",
+    "STARSYNX delivers web, AI, ERP, SEO and digital marketing services worldwide. Get a free quote today.",
   keywords:
     "STARSYNX, SEO services, digital marketing, web development, mobile app development, UI/UX design, AI machine learning, API integration, ERP CRM, social media management, IT hardware trade, import export, Meta ads, Google ads, WordPress, Shopify, Lahore, Dubai, Canberra, Pakistan, UAE, Australia",
   authors: [{ name: "STARSYNX (PVT) LTD." }, { name: "Muhammad Hamza Nadeem" }],
   openGraph: {
-    title:
-      "STARSYNX (PVT) LTD. - Synchronizing Technology, Accelerating Results",
+    title: "STARSYNX PVT LTD | Digital, AI & IT Solutions Company",
     description:
-      "End-to-end digital services under one roof with proven results. Offices in Pakistan (Head Office), UAE, and Australia.",
+      "STARSYNX delivers web, AI, ERP, SEO and digital marketing services worldwide. Get a free quote today.",
     url: "https://www.starsynx.com",
-    siteName: "STARSYNX (PVT) LTD.",
+    siteName: "STARSYNX PVT LTD",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
     site: "@starsynx",
     creator: "@starsynx",
-    title: "STARSYNX - Synchronizing Technology, Accelerating Results",
+    title: "STARSYNX PVT LTD | Digital, AI & IT Solutions Company",
     description:
-      "Your partner in digital growth across Pakistan, UAE, and Australia.",
+      "STARSYNX delivers web, AI, ERP, SEO and digital marketing services worldwide. Get a free quote today.",
   },
 };
 

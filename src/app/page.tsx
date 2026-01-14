@@ -430,7 +430,7 @@ export default function HomePage() {
               </AnimatedText>
               <AnimatedText
                 variant="p"
-                className="text-base sm:text-lg text-slate-300 mb-8 leading-relaxed"
+                className="text-base sm:text-lg text-slate-300 mb-8 leading-relaxed text-justify"
                 delay={0.1}
               >
                 At STARSYNX, we synchronize technology with your business goals

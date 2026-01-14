@@ -2,25 +2,25 @@ import { Metadata } from "next";
 import ContactPage from "./ContactPage";
 
 export const metadata: Metadata = {
-  title: "Contact Us - STARSYNX | Get Your Free Digital Consultation",
+  title: "Contact STARSYNX | Digital & IT Solutions Company",
   description:
-    "Contact STARSYNX for professional digital services including SEO, digital marketing, web development, and app development. Get a free consultation and project quote. Available in UAE, Pakistan, and Australia.",
+    "Contact STARSYNX for web, AI, ERP, SEO and digital marketing services worldwide. Request a free quote today.",
   keywords:
     "contact STARSYNX, digital consultation, SEO services quote, digital marketing services, web development Dubai, app development Pakistan, UI/UX design Australia",
   authors: [{ name: "STARSYNX" }],
   openGraph: {
-    title: "Contact Us - STARSYNX | Get Your Free Digital Consultation",
+    title: "Contact STARSYNX | Digital & IT Solutions Company",
     description:
-      "Contact STARSYNX for professional digital services across UAE, Pakistan, and Australia.",
+      "Contact STARSYNX for web, AI, ERP, SEO and digital marketing services worldwide. Request a free quote today.",
     url: "https://www.starsynx.com/contact",
     siteName: "STARSYNX",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Contact STARSYNX - Digital Excellence Solutions",
+    title: "Contact STARSYNX | Digital & IT Solutions Company",
     description:
-      "Get your free consultation for digital growth across UAE, Pakistan, and Australia.",
+      "Contact STARSYNX for web, AI, ERP, SEO and digital marketing services worldwide. Request a free quote today.",
   },
 };
 

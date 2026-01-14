@@ -30,7 +30,7 @@ export default function ContactPage() {
       country: "UAE (Regional Office)",
       isHeadOffice: false,
       address: "Office M-06, Makeen Building,\nAl Garhoud, Dubai, UAE",
-      phone: "+92 303 073 5555",
+      phone: "+971 56 485 3101",
       email: "contact@starsynx.com",
       hours: "Mon - Fri: 9:00 AM - 5:00 PM",
       flag: "��",
@@ -417,7 +417,7 @@ export default function ContactPage() {
                     UAE Office
                   </h3>
                   <p className="text-green-600 font-mono text-xl font-bold">
-                    +92 303 073 5555
+                    +971 56 485 3101
                   </p>
                   <p className="text-sm text-slate-500 mt-2">
                     Business Hours Support

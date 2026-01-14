@@ -448,7 +448,7 @@ export default function AboutPage() {
                 <div className="hidden sm:block text-slate-400">|</div>
                 <div className="flex items-center gap-2">
                   <div className="w-4 h-4 bg-cyan-400 rounded-full"></div>
-                  <span className="text-sm">UAE: +92 303 073 5555</span>
+                  <span className="text-sm">UAE: +971 56 485 3101</span>
                 </div>
                 <div className="hidden sm:block text-slate-400">|</div>
                 <div className="flex items-center gap-2">
@@ -773,8 +773,15 @@ export default function AboutPage() {
               className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 p-8 border border-slate-200 group"
             >
               <div className="flex flex-col items-center text-center">
-                <div className="w-32 h-32 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-105 transition-transform duration-300">
-                  <Globe className="w-16 h-16 text-white" />
+                <div className="w-32 h-32 bg-gradient-to-br from-cyan-50 to-blue-50 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-105 transition-transform duration-300 p-4 border border-cyan-100 relative">
+                  <Image
+                    src="/logos/tadow-logo.jpg"
+                    alt="Tadow.shop Logo"
+                    width={96}
+                    height={96}
+                    className="object-contain w-full h-full"
+                    priority
+                  />
                 </div>
                 <h3 className="text-2xl font-bold text-slate-800 mb-2">
                   Tadow.shop
@@ -802,16 +809,15 @@ export default function AboutPage() {
               className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 p-8 border border-slate-200 group"
             >
               <div className="flex flex-col items-center text-center">
-                <div className="w-32 h-32 bg-gradient-to-br from-orange-400 to-orange-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-105 transition-transform duration-300 relative overflow-hidden">
-                  {/* Book Icon Representation */}
-                  <div className="relative z-10">
-                    <div className="w-16 h-20 bg-white/20 rounded backdrop-blur-sm flex items-center justify-center">
-                      <FileText className="w-10 h-10 text-white" />
-                    </div>
-                  </div>
-                  {/* Decorative elements */}
-                  <div className="absolute top-2 left-2 w-8 h-10 bg-white/10 rounded"></div>
-                  <div className="absolute bottom-2 right-2 w-6 h-8 bg-white/10 rounded"></div>
+                <div className="w-32 h-32 bg-white rounded-2xl flex items-center justify-center mb-6 group-hover:scale-105 transition-transform duration-300 p-4 border border-orange-100 relative">
+                  <Image
+                    src="/logos/bookbyte-logo.jpeg"
+                    alt="BookByte.store Logo"
+                    width={96}
+                    height={96}
+                    className="object-contain w-full h-full"
+                    priority
+                  />
                 </div>
                 <h3 className="text-2xl font-bold text-slate-800 mb-2">
                   BookByte.store

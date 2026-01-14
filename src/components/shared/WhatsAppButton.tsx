@@ -8,7 +8,7 @@ export default function WhatsAppButton() {
   const [isHovered, setIsHovered] = useState(false);
 
   const handleWhatsAppClick = () => {
-    const phoneNumber = '923030735555'; // STARSYNX Pakistan number
+    const phoneNumber = '923030735555'; // Pakistan: +92 303 073 5555
     const message = 'Hello! I would like to inquire about your digital marketing services.';
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
@@ -37,7 +37,8 @@ export default function WhatsAppButton() {
           exit={{ opacity: 0, x: 10 }}
           className="absolute right-full mr-3 top-1/2 transform -translate-y-1/2 bg-slate-800 text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap"
         >
-          Chat with us on WhatsApp
+          Chat on WhatsApp
+          <div className="text-xs text-green-400 mt-1">+92 303 073 5555</div>
           <div className="absolute top-1/2 -right-1 transform -translate-y-1/2 w-2 h-2 bg-slate-800 rotate-45"></div>
         </motion.div>
       )}

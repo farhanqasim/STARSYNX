@@ -1196,50 +1196,50 @@ const services = {
 // Custom metadata for each service
 const serviceMetadata: Record<string, { title: string; description: string }> =
   {
-    "seo-services": {
-      title: "SEO Services – Boost Rankings | STARSYNX (Pvt) Ltd.",
-      description:
-        "Rank higher on Google with STARSYNX (Pvt) Ltd. SEO strategies built for measurable growth and visibility.",
-    },
-    "digital-marketing": {
-      title: "Digital Marketing – Targeted Growth | STARSYNX (Pvt) Ltd.",
-      description:
-        "Drive engagement and conversions with data-driven marketing campaigns by STARSYNX (Pvt) Ltd.",
-    },
-    "social-media-management": {
-      title: "Social Media Management | STARSYNX (Pvt) Ltd.",
-      description:
-        "Build and manage your brand presence with STARSYNX (Pvt) Ltd. expert social media management services.",
-    },
     "web-development": {
-      title: "Web Development – Modern & Secure | STARSYNX (Pvt) Ltd.",
+      title: "Web Development Services | Custom Websites",
       description:
-        "STARSYNX (Pvt) Ltd. develops responsive, secure, and SEO-optimized websites for businesses worldwide.",
+        "Custom web development for websites and web applications worldwide. Get a free quote from STARSYNX.",
     },
     "mobile-app-development": {
-      title: "Mobile App Development | STARSYNX (Pvt) Ltd.",
+      title: "Mobile App Development | Android & iOS Apps",
       description:
-        "STARSYNX (Pvt) Ltd. builds Android and iOS apps with top-tier design, performance, and functionality.",
+        "STARSYNX builds secure Android and iOS mobile apps for businesses worldwide. Request a free quote today.",
     },
     "ui-ux-design-solutions": {
-      title: "UI/UX Design Solutions | STARSYNX (Pvt) Ltd.",
+      title: "UI/UX Design Services | Modern User Experiences",
       description:
-        "STARSYNX (Pvt) Ltd. creates modern, intuitive, and user-focused designs to enhance digital experiences.",
+        "Professional UI/UX design focused on usability and conversions worldwide. Get a free quote today.",
     },
-    "erp-crm-solutions": {
-      title: "ERP & CRM Solutions – Automation | STARSYNX (Pvt) Ltd.",
+    "ai-machine-learning": {
+      title: "AI & Machine Learning Solutions | Smart Automation",
       description:
-        "Streamline operations with ERP and CRM automation systems from STARSYNX (Pvt) Ltd.",
+        "AI and machine learning solutions for automation and analytics worldwide. Contact STARSYNX for a free quote.",
     },
     "api-integration-automation": {
-      title: "API Integration & Automation | STARSYNX (Pvt) Ltd.",
+      title: "API Integration & Automation Services",
       description:
-        "STARSYNX (Pvt) Ltd. provides seamless API integration and workflow automation for smart business solutions.",
+        "Reliable API integration and automation services for global businesses. Get a free quote from STARSYNX.",
     },
-    "ai-machine-learning-solutions": {
-      title: "AI & Machine Learning | STARSYNX (Pvt) Ltd.",
+    "erp-crm-solutions": {
+      title: "ERP & CRM Solutions | Business Management",
       description:
-        "Innovate with STARSYNX (Pvt) Ltd. AI and machine learning solutions that power intelligent business growth.",
+        "Custom ERP and CRM systems to streamline global business operations. Request a free quote now.",
+    },
+    "seo-services": {
+      title: "SEO Services | Improve Rankings & Traffic",
+      description:
+        "SEO services to improve rankings, traffic and online visibility worldwide. Get a free quote today.",
+    },
+    "digital-marketing": {
+      title: "Digital Marketing Services | Online Growth",
+      description:
+        "Digital marketing solutions to generate leads and sales globally. Request a free quote today.",
+    },
+    "social-media-management": {
+      title: "Social Media Management | Brand Growth",
+      description:
+        "Social media management services to grow brand engagement worldwide. Get a free quote today.",
     },
     "import-export-it": {
       title: "IT Hardware Import & Export | STARSYNX (Pvt) Ltd.",
