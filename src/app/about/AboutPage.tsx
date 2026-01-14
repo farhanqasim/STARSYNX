@@ -775,7 +775,7 @@ export default function AboutPage() {
               <div className="flex flex-col items-center text-center">
                 <div className="w-32 h-32 bg-gradient-to-br from-cyan-50 to-blue-50 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-105 transition-transform duration-300 p-4 border border-cyan-100 relative">
                   <Image
-                    src="/logos/tadow-logo.jpg"
+                    src="/logos/tadow-logo.png"
                     alt="Tadow.shop Logo"
                     width={96}
                     height={96}
@@ -784,16 +784,8 @@ export default function AboutPage() {
                   />
                 </div>
                 <h3 className="text-2xl font-bold text-slate-800 mb-2">
-                  Tadow.shop
+                  Tadow
                 </h3>
-                <p className="text-slate-600 mb-4">
-                  Your one-stop destination for electronics, gadgets, and tech
-                  products
-                </p>
-                <div className="flex items-center gap-2 text-cyan-600 font-semibold">
-                  <span>Visit Store</span>
-                  <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </div>
               </div>
             </motion.a>
 
@@ -820,15 +812,10 @@ export default function AboutPage() {
                   />
                 </div>
                 <h3 className="text-2xl font-bold text-slate-800 mb-2">
-                  BookByte.store
+                  BookByte
                 </h3>
-                <p className="text-slate-600 mb-4">
-                  A Byte of Magic in Every Book - Your online bookstore
-                </p>
-                <div className="flex items-center gap-2 text-orange-600 font-semibold">
-                  <span>Visit Store</span>
-                  <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </div>
+                
+               
               </div>
             </motion.a>
           </div>

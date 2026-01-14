@@ -639,16 +639,14 @@ export default function PrivacyPage() {
                         </div>
                         <div className="bg-white rounded-lg p-4 border-l-4 border-blue-500 shadow-sm">
                           <p className="leading-relaxed text-slate-700">
-                            <strong className="text-slate-800">Pakistan (Head Office):</strong> Plot B, 281
-                            Ghazi Rd, Khuda Buksh Colony KB Society, Lahore,
-                            Punjab
+                            <strong className="text-slate-800">Pakistan (Head Office):</strong> Suit No. 9, Izhar Villas, Wafaqi Colony Road,
+                            Johar Town, Lahore, Pakistan
                           </p>
                         </div>
                         <div className="bg-white rounded-lg p-4 border-l-4 border-indigo-500 shadow-sm">
                           <p className="leading-relaxed text-slate-700">
-                            <strong className="text-slate-800">UAE (Regional Office):</strong> Concord Tower,
-                            Dubai Internet City, 9th floor, Black Sea Business
-                            Center
+                            <strong className="text-slate-800">UAE (Regional Office):</strong> Office M-06, Makeen Building,
+                            Al Garhoud, Dubai, UAE
                           </p>
                         </div>
                         <div className="bg-white rounded-lg p-4 border-l-4 border-purple-500 shadow-sm">
