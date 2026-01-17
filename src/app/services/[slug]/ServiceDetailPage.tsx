@@ -460,7 +460,16 @@ export default function ServiceDetailPage({ service }: ServiceDetailProps) {
               </p>
               <div className="flex items-center justify-center space-x-4">
                 <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
-                  <span className="text-xl font-bold">JS</span>
+                  <span className="text-xl font-bold">
+                    {(() => {
+                      const name = "MUHAMMAD HAMZA NADEEM";
+                      const words = name.trim().split(/\s+/);
+                      if (words.length >= 2) {
+                        return (words[0][0] + words[1][0]).toUpperCase();
+                      }
+                      return words[0] ? words[0][0].toUpperCase() : "";
+                    })()}
+                  </span>
                 </div>
                 <div>
                   <p className="font-semibold">MUHAMMAD HAMZA NADEEM</p>

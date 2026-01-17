@@ -5,6 +5,7 @@ import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
 import WhatsAppButton from "../components/shared/WhatsAppButton";
 import Schema from "../components/shared/Schema";
+import DisableInspect from "../components/shared/DisableInspect";
 import { AnalyticsProvider } from "@/contexts/AnalyticsContext";
 
 const inter = Inter({
@@ -45,6 +46,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} font-sans antialiased bg-slate-900`}>
+        <DisableInspect />
         <AnalyticsProvider>
           <Schema />
           <Header />

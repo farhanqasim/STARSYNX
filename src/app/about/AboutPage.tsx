@@ -775,7 +775,7 @@ export default function AboutPage() {
               <div className="flex flex-col items-center text-center">
                 <div className="w-32 h-32 bg-gradient-to-br from-cyan-50 to-blue-50 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-105 transition-transform duration-300 p-4 border border-cyan-100 relative">
                   <Image
-                    src="/logos/tadow-logo.png"
+                    src="/logos/tadow-logo.jpeg"
                     alt="Tadow.shop Logo"
                     width={96}
                     height={96}
